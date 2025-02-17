@@ -181,6 +181,44 @@ float calcularSalarioModal(Funcionario *funcionarios, int n) {
     return (limites[indice_modal][0] + limites[indice_modal][1]) / 2;
 }
 
+//calcularSalarioMedioPELOAMORDEJESUSCRISTO
+float calcularSalarioMedio(Funcionario *funcionarios, int n) {
+    int frequencia[5] = {0};
+    float soma_fi_xi = 0;
+    int total_fi = 0;
+    
+    float limites[5][2] = {
+        {0, 1518.00},
+        {1518.00, 3036.00},
+        {3036.00, 7590.00},
+        {7590.00, 9108.00},
+        {9108.00, 10626.00}
+    };
+
+    for (int i = 0; i < n; i++) {
+        if (funcionarios[i].salario < 1518.00) {
+            frequencia[0]++;
+        } else if (funcionarios[i].salario < 3036.00) {
+            frequencia[1]++;
+        } else if (funcionarios[i].salario < 7590.00) {
+            frequencia[2]++;
+        } else if (funcionarios[i].salario < 9108.00) {
+            frequencia[3]++;
+        } else {
+            frequencia[4]++;
+        }
+    }
+
+    for (int i = 0; i < 5; i++) {
+        float xi = (limites[i][0] + limites[i][1])/2;
+        soma_fi_xi += frequencia[i] * xi;
+        total_fi += frequencia[i];
+    }
+
+    return (total_fi > 0) ? (soma_fi_xi / total_fi) :
+0;
+}
+
 void exibirFuncionarios(Funcionario *funcionarios, int n) {
     for (int i = 0; i < n; i++) {
         printf("Matrícula: %d\n", funcionarios[i].matricula);
@@ -276,9 +314,10 @@ int main() {
 
     float salario_modal = calcularSalarioModal(funcionarios, n);
     printf("\nSalário modal: R$ %.2f\n", salario_modal);
+    
+    float salario_medio = calcularSalarioMedio(funcionarios, n);
+    printf("\nSalário médio: R$ %.2f\n", salario_medio);
 
     free(funcionarios);
     return 0;
 }
-
-
