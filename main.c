@@ -8,7 +8,7 @@
 #define MAX_DATA 11
 #define SALARIO_MAXIMO 10626.00
 #define BONIFICACAO 0.05
-#define ANO_ATUAL 2023
+#define ANO_ATUAL 2025
 
 typedef struct {
     int matricula;
