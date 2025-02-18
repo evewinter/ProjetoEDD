@@ -181,19 +181,11 @@ float calcularSalarioModal(Funcionario *funcionarios, int n) {
     return (limites[indice_modal][0] + limites[indice_modal][1]) / 2;
 }
 
-//calcularSalarioMedioPELOAMORDEJESUSCRISTO
+//calcularSalarioMedio
 float calcularSalarioMedio(Funcionario *funcionarios, int n) {
     int frequencia[5] = {0};
     float soma_fi_xi = 0;
     int total_fi = 0;
-    
-    float limites[5][2] = {
-        {0, 1518.00},
-        {1518.00, 3036.00},
-        {3036.00, 7590.00},
-        {7590.00, 9108.00},
-        {9108.00, 10626.00}
-    };
 
     for (int i = 0; i < n; i++) {
         if (funcionarios[i].salario < 1518.00) {
@@ -215,6 +207,14 @@ float calcularSalarioMedio(Funcionario *funcionarios, int n) {
         total_fi += frequencia[i];
     }
 
+     float limites[5][2] = {
+        {0, 1518.00},
+        {1518.00, 3036.00},
+        {3036.00, 7590.00},
+        {7590.00, 9108.00},
+        {9108.00, 10626.00}
+    };
+
     return (total_fi > 0) ? (soma_fi_xi / total_fi) :
 0;
 }
@@ -232,7 +232,7 @@ void exibirFuncionarios(Funcionario *funcionarios, int n) {
     }
 }
 
-// Função de ordenação dos funcionários
+//ordenação dos funcionários
 int compararPorSalario(const void *a, const void *b) {
     return ((Funcionario *)a)->salario > ((Funcionario *)b)->salario;
 }
@@ -261,7 +261,6 @@ int main() {
 
     lerFuncionarios(funcionarios, n);
 
-    // Menu de opções
     int opcao;
     printf("Escolha a ordenação dos funcionários:\n");
     printf("1. Ordenar por Salário\n");
